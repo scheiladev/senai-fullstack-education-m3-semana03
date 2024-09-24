@@ -39,12 +39,13 @@ class EstudanteControllerTest {
     estudante = new Estudante(1L, "Scheila", "18.07", Collections.emptyList());
   }
 
-  @SneakyThrows
   @Test
-  void listarEstudantes() {
+  void listarEstudantes() throws Exception {
     when(estudanteService.listarEstudantes()).thenReturn(Collections.emptyList());
 
-    mockMvc.perform(get("/estudantes")).andExpect(status().isOk());
+    mockMvc.perform(
+      get("/estudantes"))
+        .andExpect(status().isOk());
   }
 
   @Test
@@ -61,7 +62,8 @@ class EstudanteControllerTest {
     when(estudanteService.cadastrarEstudante(estudante.getNome(), estudante.getMatricula())).thenReturn(estudante);
 
     mockMvc.perform(
-      post("/estudantes").contentType(MediaType.APPLICATION_JSON)
+      post("/estudantes")
+        .contentType(MediaType.APPLICATION_JSON)
         .content("{\n" +
           "\t\"nome\":\""+ estudante.getNome()+"\",\n" +
           "\t\"matricula\": \""+ estudante.getMatricula()+"\"\n" +

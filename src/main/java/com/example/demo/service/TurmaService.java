@@ -12,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TurmaService {
     final TurmaRepository turmaRepository;
+    final EstudanteService estudanteService;
 
     public Turma cadastrarTurma(String nome) {
         Turma turma = new Turma();
@@ -41,9 +42,11 @@ public class TurmaService {
         turmaRepository.deleteById(id);
     }
 
-    public Estudante adicionarEstudanteNaTurma(Long turmaId, Estudante estudante) {
+    public Estudante adicionarEstudanteNaTurma(Long turmaId, Long estudanteId) {
+        Estudante estudante = estudanteService.buscarEstudantePorId(estudanteId);
         Turma turma = buscarTurmaPorId(turmaId);
-        estudante.getTurma().add(turma);
+
+        turma.getEstudantes().add(estudante);
         return estudante;
     }
 
@@ -51,6 +54,5 @@ public class TurmaService {
         Turma turma = buscarTurmaPorId(turmaId);
         estudante.getTurma().remove(turma);
         return estudante;
-
     }
 }

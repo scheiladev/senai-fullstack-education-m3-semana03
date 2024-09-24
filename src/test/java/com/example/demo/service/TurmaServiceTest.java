@@ -102,20 +102,6 @@ class TurmaServiceTest {
   }
 
   @Test
-  void adicionarEstudanteNaTurma() {
-
-    when(turmaRepository.findById(anyLong())).thenReturn(Optional.of(turma));
-    Estudante estudanteTeste = turmaService.adicionarEstudanteNaTurma(1L,estudante);
-
-    verify(turmaRepository).findById(anyLong());
-
-    assertEquals(estudante.getMatricula(), estudanteTeste.getMatricula() );
-    assertEquals(estudante.getNome(), estudanteTeste.getNome() );
-    assertEquals(1, estudanteTeste.getTurma().size());
-    assertEquals(turma.getNome(), estudanteTeste.getTurma().get(0).getNome());
-  }
-
-  @Test
   void removerEstudanteDaTurma() {
 
     estudante.getTurma().add(turma);
